@@ -1,0 +1,140 @@
+<div class="task-manager">
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1 class="main-title">{{ title }}</h1>
+      <p class="subtitle">Organiza y gestiona tus tareas de manera eficiente</p>
+      
+      <div class="stats-container">
+        <div class="stat-card">
+          <span class="stat-number">{{ tasks.length }}</span>
+          <span class="stat-label">Total de Tareas</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">{{ pendingTasks }}</span>
+          <span class="stat-label">Pendientes</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">{{ inProgressTasks }}</span>
+          <span class="stat-label">En Progreso</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">{{ completedTasks }}</span>
+          <span class="stat-label">Completadas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-section">
+      <h2 class="section-title">
+        📋 Gestión de Tareas
+      </h2>
+      
+      <form class="add-task-form" (ngSubmit)="addTask()">
+        <div class="form-group">
+          <label class="form-label" for="taskName">Nueva Tarea</label>
+          <input 
+            id="taskName"
+            type="text" 
+            class="form-input" 
+            [(ngModel)]="newTaskName"
+            name="taskName"
+            placeholder="Escribe el nombre de la tarea..."
+            required
+          />
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="taskPriority">Prioridad</label>
+          <select 
+            id="taskPriority"
+            class="form-select" 
+            [(ngModel)]="newTaskPriority"
+            name="taskPriority"
+          >
+            <option value="Baja">🟢 Baja</option>
+            <option value="Media">🟡 Media</option>
+            <option value="Alta">🔴 Alta</option>
+          </select>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="btn btn-primary" 
+          [disabled]="!newTaskName.trim()"
+        >
+          + Agregar Tarea
+        </button>
+      </form>
+
+      <div class="table-container" *ngIf="tasks.length > 0; else emptyState">
+        <table class="task-table">
+          <thead>
+            <tr>
+              <th>Nombre de la Tarea</th>
+              <th>Estado</th>
+              <th>Prioridad</th>
+              <th>Fecha de Creación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasks">
+              <td class="task-name">{{ task.name }}</td>
+              <td>
+                <select 
+                  class="status-select"
+                  [value]="task.status"
+                  (change)="onStatusChange($event, task.id)"
+                >
+                  <option value="Pendiente">⏳ Pendiente</option>
+                  <option value="En Progreso">🔄 En Progreso</option>
+                  <option value="Completada">✅ Completada</option>
+                </select>
+              </td>
+              <td>
+                <span 
+                  class="priority-badge"
+                  [ngClass]="{
+                    'priority-alta': task.priority === 'Alta',
+                    'priority-media': task.priority === 'Media',
+                    'priority-baja': task.priority === 'Baja'
+                  }"
+                >
+                  {{ task.priority }}
+                </span>
+              </td>
+              <td class="task-date">
+                {{ task.createdAt | date:'dd/MM/yyyy' }}
+              </td>
+              <td>
+                <div class="task-actions">
+                  <button 
+                    class="btn btn-danger"
+                    (click)="deleteTask(task.id)"
+                    title="Eliminar tarea"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <div class="empty-icon">📝</div>
+          <div class="empty-text">No hay tareas registradas</div>
+          <div class="empty-subtitle">¡Agrega tu primera tarea para comenzar!</div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{
+  "com.liferay.client.extension.type.configuration.CETConfiguration~liferay-sample-custom-element-3" : {
+    ":configurator:policy" : "force",
+    "baseURL" : "${portalURL}/o/liferay-sample-custom-element-3",
+    "buildTimestamp" : 1762366060887,
+    "description" : "",
+    "dxp.lxc.liferay.com.virtualInstanceId" : "default",
+    "name" : "Matador",
+    "projectId" : "liferaysamplecustomelement3",
+    "projectName" : "liferay-sample-custom-element-3",
+    "properties" : [ ],
+    "sourceCodeURL" : "",
+    "type" : "customElement",
+    "typeSettings" : [ "friendlyURLMapping=liferay-sample-custom-element-3", "instanceable=false", "urls=main.1cfa2d1ecb4a401e.js\npolyfills.1325ca2941778782.js\nruntime.a713fae121c93de2.js", "useESM=true", "htmlElementName=liferay-sample-custom-element-3", "cssURLs=styles.ef46db3751d8e999.css", "portletCategoryName=category.client-extensions" ],
+    "webContextPath" : "/liferay-sample-custom-element-3"
+  }
+}
