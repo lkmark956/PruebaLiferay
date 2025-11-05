@@ -1,22 +1,22 @@
-/* Gestor de Tareas con Tabla - Nueva Paleta de Colores */
+/* Gestor de Tareas con Tabla - Paleta Elegante y Moderna */
 :host {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   display: block;
   box-sizing: border-box;
-  --primary-color: #0ea5e9;
-  --secondary-color: #10b981;
-  --accent-color: #6366f1;
+  --primary-color: #8b5cf6;
+  --secondary-color: #ec4899;
+  --accent-color: #06b6d4;
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --danger-color: #ef4444;
-  --background-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 50%, #f8fafc 100%);
-  --card-background: rgba(255, 255, 255, 0.9);
-  --text-primary: #0f172a;
+  --background-gradient: linear-gradient(135deg, #faf5ff 0%, #fdf4ff 25%, #ecfeff 75%, #f0fdfa 100%);
+  --card-background: rgba(255, 255, 255, 0.95);
+  --text-primary: #1e293b;
   --text-secondary: #64748b;
   --border-color: #e2e8f0;
-  --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-light: 0 4px 6px -1px rgba(139, 92, 246, 0.1);
+  --shadow-medium: 0 10px 15px -3px rgba(139, 92, 246, 0.15);
+  --shadow-large: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
 }
 
 .task-manager {
@@ -34,6 +34,18 @@
 .header {
   text-align: center;
   margin-bottom: 3rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .main-title {
@@ -41,10 +53,21 @@
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 3s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .subtitle {
@@ -70,6 +93,23 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .stat-card::before {
@@ -79,20 +119,26 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(90deg, #8b5cf6, #ec4899, #06b6d4);
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-medium);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-large);
+}
+
+.stat-card:hover .stat-number {
+  transform: scale(1.1);
+  color: #8b5cf6;
 }
 
 .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #8b5cf6;
   display: block;
   margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 .stat-label {
@@ -109,6 +155,18 @@
   box-shadow: var(--shadow-medium);
   position: relative;
   overflow: hidden;
+  animation: fadeInScale 0.8s ease-out 0.3s backwards;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .task-section::before {
@@ -118,7 +176,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+  background: linear-gradient(90deg, #8b5cf6, #ec4899, #06b6d4);
 }
 
 .section-title {
@@ -131,16 +189,56 @@
   gap: 0.5rem;
 }
 
+.section-title::before {
+  content: '📋';
+  font-size: 1.8rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 .add-task-form {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 1rem;
   align-items: end;
   margin-bottom: 2rem;
   padding: 1.5rem;
   background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+  animation: fadeInForm 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-task-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899, #06b6d4);
+}
+
+@keyframes fadeInForm {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .form-group {
@@ -164,11 +262,25 @@
   background: white;
   transition: all 0.3s ease;
   outline: none;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.05);
 }
 
 .form-input:focus, .form-select:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  animation: pulseField 0.5s;
+}
+
+@keyframes pulseField {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.15);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(139, 92, 246, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  }
 }
 
 .form-input::placeholder {
@@ -191,20 +303,81 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
   color: white;
-  box-shadow: var(--shadow-light);
+  box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: bounceInBtn 0.7s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  width: 100%;
+  justify-content: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.btn-add-task {
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+@keyframes bounceInBtn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  80% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(139, 92, 246, 0.4), 0 6px 16px rgba(236, 72, 153, 0.3);
+  background: linear-gradient(135deg, #9333ea 0%, #f472b6 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(1.01);
 }
 
 .btn-primary:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
+}
+
+.btn-primary:disabled:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-danger {
@@ -212,11 +385,13 @@
   color: white;
   padding: 0.5rem;
   border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 .btn-danger:hover {
   background: #dc2626;
-  transform: scale(1.05);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 .table-container {
@@ -251,12 +426,31 @@
 }
 
 .task-table tbody tr {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  animation: slideInLeft 0.5s ease-out backwards;
+}
+
+.task-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.task-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.task-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+.task-table tbody tr:nth-child(4) { animation-delay: 0.4s; }
+.task-table tbody tr:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .task-table tbody tr:hover {
-  background-color: #f8fafc;
-  transform: scale(1.005);
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+  transform: translateX(5px) scale(1.01);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
 }
 
 .task-name {
@@ -274,12 +468,19 @@
   font-weight: 500;
   text-align: center;
   min-width: 80px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.status-badge:hover, .priority-badge:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .status-pendiente {
-  background-color: rgba(99, 102, 241, 0.1);
-  color: var(--accent-color);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  background-color: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .status-progreso {
@@ -335,8 +536,8 @@
 
 .status-select:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.1);
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
 }
 
 .empty-state {
@@ -375,8 +576,9 @@
 
 .shape {
   position: absolute;
-  opacity: 0.05;
+  opacity: 0.08;
   animation: float 20s infinite ease-in-out;
+  filter: blur(2px);
 }
 
 .shape-1 {
@@ -384,7 +586,7 @@
   left: 5%;
   width: 100px;
   height: 100px;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   animation-delay: 0s;
 }
@@ -394,7 +596,7 @@
   right: 10%;
   width: 150px;
   height: 150px;
-  background: var(--secondary-color);
+  background: linear-gradient(135deg, #ec4899, #06b6d4);
   border-radius: 50%;
   animation-delay: -7s;
 }
@@ -404,7 +606,7 @@
   left: 15%;
   width: 80px;
   height: 80px;
-  background: var(--accent-color);
+  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
   border-radius: 20px;
   transform: rotate(45deg);
   animation-delay: -14s;
@@ -412,13 +614,13 @@
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px) rotate(0deg) scale(1);
   }
   33% {
-    transform: translateY(-30px) rotate(120deg);
+    transform: translateY(-40px) rotate(120deg) scale(1.1);
   }
   66% {
-    transform: translateY(20px) rotate(240deg);
+    transform: translateY(30px) rotate(240deg) scale(0.9);
   }
 }
 
@@ -456,6 +658,10 @@
   .task-actions {
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .btn-add-task {
+    width: 100%;
   }
 }
 

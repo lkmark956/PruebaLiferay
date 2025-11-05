@@ -23,8 +23,8 @@
 									"type": "initial"
 								},
 								{
-									"maximumError": "10kb",
-									"maximumWarning": "8kb",
+									"maximumError": "12kb",
+									"maximumWarning": "10kb",
 									"type": "anyComponentStyle"
 								}
 							],

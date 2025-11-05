@@ -32,7 +32,7 @@
 
     <div class="task-section">
       <h2 class="section-title">
-        📋 Gestión de Tareas
+        Gestión de Tareas
       </h2>
       
       <form class="add-task-form" (ngSubmit)="addTask()">
@@ -63,13 +63,17 @@
           </select>
         </div>
         
-        <button 
-          type="submit" 
-          class="btn btn-primary" 
-          [disabled]="!newTaskName.trim()"
-        >
-          + Agregar Tarea
-        </button>
+        <div class="form-group form-group-button">
+          <label class="form-label">&nbsp;</label>
+          <button 
+            type="submit" 
+            class="btn btn-primary btn-add-task" 
+            [disabled]="!newTaskName.trim()"
+          >
+            <span class="btn-icon">✨</span>
+            <span class="btn-text">Agregar Tarea</span>
+          </button>
+        </div>
       </form>
 
       <div class="table-container" *ngIf="tasks.length > 0; else emptyState">
